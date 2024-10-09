@@ -14,24 +14,16 @@
         // Dropdown spécifique pour le jeu
         $dropDownJeu = [
             [
-                'serveur' => 'Serveurs',
+                'name' => 'Nos serveurs',
                 'url' => '#', // URL pour le jeu (à adapter)
-                'dropdown' => $serveurs, // Liste des serveurs pour le dropdown
             ],
             [
-                'serveur' => 'Forum',
+                'name' => 'Suggestion',
                 'url' => '#', // URL pour le forum (à adapter)
-                'dropdown' => null, // Pas de dropdown pour le forum
             ],
             [
-                'serveur' => 'Boutique',
+                'name' => 'Informations',
                 'url' => '#', // URL pour la boutique (à adapter)
-                'dropdown' => null, // Pas de dropdown pour la boutique
-            ],
-            [
-                'serveur' => 'Vote',
-                'url' => '#', // URL pour les votes (à adapter)
-                'dropdown' => null, // Pas de dropdown pour les votes
             ],
         ];
 
@@ -39,7 +31,7 @@
         $menuItems[] = [
             'name' => $jeu,
             'url' => '#', // URL pour le jeu (à adapter)
-            'dropdown' => $dropDownJeu, // Liste des serveurs pour le dropdown
+            'dropdown' => $dropDownJeu, // Liste dropdown pour les jeux
         ];
     }
 
@@ -134,34 +126,14 @@
                 <a href="{{ $item['url'] }}" class="text-white">{{ $item['name'] }}</a>
                 <span
                     class="absolute left-1/2 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-
                 <!-- Dropdown Menu -->
-                @if (!empty($item['dropdown']))
-                    <div class="absolute left-1/2 transform -translate-x-1/2 hidden group-hover:block w-48 bg-white text-gray-800 rounded-lg shadow-lg z-10">
-                        <ul class="py-2">
-                            @foreach ($item['dropdown'] as $dropdownItem)
-                                <li class="relative group">
-                                    <a href="{{ $dropdownItem['url'] ?? '#' }}" class="block px-4 py-2 hover:bg-gray-100">
-                                        {{ $dropdownItem['serveur'] }}
-                                    </a>
-
-                                    <!-- Sous-menu pour les serveurs -->
-                                    @if (!empty($dropdownItem['dropdown']))
-                                        <div class="absolute left-full top-0 hidden group-hover:block w-40 bg-gray-200 text-gray-800 rounded-lg shadow-lg">
-                                            <ul class="py-2">
-                                                @foreach ($dropdownItem['dropdown'] as $serveur)
-                                                    <li>
-                                                        <a href="{{ $serveur['url'] ?? '#' }}" class="block px-4 py-2 hover:bg-gray-300">
-                                                            {{ $serveur['nom_serv'] ?? 'Serveur Inconnu' }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
+                @if ($item['dropdown'])
+                    <div
+                        class="hidden group-hover:block absolute top-full left-1/2 w-full transform -translate-x-1/2 bg-gray-800 text-white py-2 rounded-md shadow-md">
+                        @foreach ($item['dropdown'] as $dropdownItem)
+                            <a href="{{ $dropdownItem['url'] }}"
+                                class="block px-4 py-2 hover:bg-gray-700">{{ $dropdownItem['name'] }}</a>
+                        @endforeach
                     </div>
                 @endif
             </div>
@@ -170,9 +142,18 @@
 
     <!-- Menu mobile -->
     <div id="nav-content-mobile"
-        class="fixed top-0 left-0 h-full w-40 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center space-y-4 text-lg">
+        class="fixed top-0 left-0 h-full p-2 w-40 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center space-y-4 text-lg">
         @foreach ($menuItems as $item)
             <a href="{{ $item['url'] }}" class="text-white">{{ $item['name'] }}</a>
+            <!-- Dropdown Menu déroulant au clic de la catégorie -->
+            @if ($item['dropdown'])
+                <div class="flex flex-col space-y-2">
+                    @foreach ($item['dropdown'] as $dropdownItem)
+                        <a href="{{ $dropdownItem['url'] }}"
+                            class="text-white hover:bg-gray-700 font-size text-sm  px-4 py-2">{{ $dropdownItem['name'] }}</a>
+                    @endforeach
+                </div>
+            @endif
         @endforeach
     </div>
 </nav>
