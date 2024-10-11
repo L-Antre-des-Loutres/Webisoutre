@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-@include('head.head')
+<!-- resources/views/home.blade.php -->
+@extends('layouts.app')
 
-<body>
-    @include('header.header')
-    <div class="container">
-        <div class="content">
-            <div class="title">Laravel</div>
-        </div>
-    </div>
-</body>
+@section('title', 'ADL - Home')
 
-</html>
+@section('content')
+    <h1>Bienvenue sur la page d'accueil</h1>
+    <p>Ceci est le contenu de la page d'accueil.</p>
+@endsection
