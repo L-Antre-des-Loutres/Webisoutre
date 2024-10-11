@@ -42,12 +42,29 @@
         'dropdown' => null, // Pas de dropdown pour le forum
     ];
 
+    // Dropdown de "Discord"
+    $dropDownDiscord = [
+        [
+            'name' => 'Nos Bots',
+            'url' => '#', // URL (à adapter)
+        ],
+        [
+            'name' => 'Notre Discord',
+            'url' => '#', // URL (à adapter)
+        ],
+        [
+            'name' => 'Nos règles',
+            'url' => '#', // URL (à adapter)
+        ],
+    ];
+
     // Ajouter un élément "Discord" dans le menu
     $menuItems[] = [
         'name' => 'Discord',
         'url' => '#', // URL pour le discord (à adapter)
-        'dropdown' => null, // Pas de dropdown pour le discord
+        'dropdown' => $dropDownDiscord,
     ];
+
 @endphp
 
 <nav class="navbar bg-gray-800 px-4 md:px-8 py-4 sticky top-0 z-50">
@@ -147,10 +164,10 @@
             <a href="{{ $item['url'] }}" class="text-white">{{ $item['name'] }}</a>
             <!-- Dropdown Menu déroulant au clic de la catégorie -->
             @if ($item['dropdown'])
-                <div class="flex flex-col space-y-2">
+                <div class="flex flex-col space-y-1">
                     @foreach ($item['dropdown'] as $dropdownItem)
                         <a href="{{ $dropdownItem['url'] }}"
-                            class="text-white hover:bg-gray-700 font-size text-sm  px-4 py-2">{{ $dropdownItem['name'] }}</a>
+                            class="text-white hover:bg-gray-700 font-size text-sm  px-4 py-3">{{ $dropdownItem['name'] }}</a>
                     @endforeach
                 </div>
             @endif
