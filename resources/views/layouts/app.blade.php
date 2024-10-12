@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,8 +17,11 @@
     <!-- Navigation / Header -->
     @include('components.header.header')
 
+    <!-- Espace réservé pour éviter que le contenu soit recouvert -->
+    <div id="header-spacer" class="min-h-[12vh] md:min-h-[22vh] lg:min-h-[22vh] xl:min-h-[15vh]"></div>
+
     <!-- Main content -->
-    <div class="container">
+    <div class="container min-h-[100vh]">
         @yield('content')
     </div>
 
