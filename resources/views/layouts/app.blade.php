@@ -18,7 +18,8 @@
     @include('components.header.header')
 
     <!-- Espace réservé pour éviter que le contenu soit recouvert -->
-    <div id="header-spacer" class="min-h-[12vh] md:min-h-[22vh] lg:min-h-[22vh] xl:min-h-[15vh]"></div>
+    <div id="header-spacer" class="min-h-[6rem] md:min-h-[8rem] lg:min-h-[8rem] xl:min-h-[8rem]"></div>
+
 
     <!-- Main content -->
     <div class="container min-h-[100vh]">

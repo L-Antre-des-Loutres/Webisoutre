@@ -159,18 +159,74 @@
 
     <!-- Menu mobile -->
     <div id="nav-content-mobile"
-        class="fixed top-0 left-0 h-full p-2 w-40 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center space-y-4 text-lg">
+        class="fixed top-0 left-0 h-full min-h-screen p-4 w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-start space-y-4 text-lg md:w-72 lg:w-80">
+
+        <!-- Espace pour éviter le texte sur la croix -->
+        <div class="min-h-[3rem]"></div>
+
         @foreach ($menuItems as $item)
-            <a href="{{ $item['url'] }}" class="text-white">{{ $item['name'] }}</a>
-            <!-- Dropdown Menu déroulant au clic de la catégorie -->
-            @if ($item['dropdown'])
-                <div class="flex flex-col space-y-1">
-                    @foreach ($item['dropdown'] as $dropdownItem)
-                        <a href="{{ $dropdownItem['url'] }}"
-                            class="text-white hover:bg-gray-700 font-size text-sm  px-4 py-3">{{ $dropdownItem['name'] }}</a>
-                    @endforeach
-                </div>
-            @endif
+            <!-- Lien de la catégorie principale -->
+            <div>
+                <button
+                    class="flex justify-between items-center w-full text-left text-white hover:bg-gray-700 px-4 py-2 rounded-md transition duration-150 ease-in-out"
+                    onclick="toggleDropdown('dropdown-{{ $loop->index }}', 'icon-{{ $loop->index }}')">
+                    <span>{{ $item['name'] }}</span>
+                    @if ($item['dropdown'])
+                        <span id="icon-{{ $loop->index }}"
+                            class="text-white rotate-90 transition-transform duration-200">&#x25BC;</span>
+                        <!-- Coche ou symbole de flèche vers le bas -->
+                    @endif
+                </button>
+
+                <!-- Dropdown Menu déroulant au clic de la catégorie -->
+                @if ($item['dropdown'])
+                    <div id="dropdown-{{ $loop->index }}" class="dropdown">
+                        <div class="flex flex-col space-y-1 pl-4">
+                            @foreach ($item['dropdown'] as $dropdownItem)
+                                <a href="{{ $dropdownItem['url'] }}"
+                                    class="text-white hover:bg-gray-700 text-sm px-4 py-2 rounded-md transition duration-150 ease-in-out">{{ $dropdownItem['name'] }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
         @endforeach
     </div>
+
+    <style>
+
+        .rotate-90 {
+            transform: rotate(-90deg);
+            transition: transform 0.2s ease-in-out;
+            /* Durée de 0.2s pour une animation plus rapide */
+        }
+
+        .dropdown {
+            overflow: hidden;
+            /* Évite le débordement pendant la transition */
+            max-height: 0;
+            /* Masque le menu par défaut */
+            transition: max-height 0.2s ease-in-out;
+            /* Durée de 0.2s pour une animation plus rapide */
+        }
+
+        .dropdown.open {
+            max-height: 500px;
+            /* Valeur suffisamment grande pour contenir le contenu */
+        }
+    </style>
+
+    <script>
+        function toggleDropdown(dropdownId, iconId) {
+            const dropdown = document.getElementById(dropdownId);
+            const icon = document.getElementById(iconId);
+
+            // Toggle visibility of the dropdown menu
+            dropdown.classList.toggle('open');
+
+            // Toggle rotation class on the icon
+            icon.classList.toggle('rotate-90');
+        }
+    </script>
+
 </nav>
