@@ -1,14 +1,13 @@
-<!-- resources/views/home.blade.php -->
+<!-- Utilisation du layout app.blade.php -->
 @extends('layouts.app')
 
+<!-- Gestion du titre de la page -->
 @section('title', 'ADL - Home')
 
+<!-- Emplacement du contenu de la page -->
 @section('content')
-    <h1>Bienvenue sur la page d'accueil</h1>
-    <p>Ceci est le contenu de la page d'accueil.</p>
 
-
-    <p>Tableau des serveurs</p>
+<!-- Utilisation du composant liste_serveur.blade.php -->
     <!-- resources/components/liste_serveur.blade.php -->
     @php
         $jeu = 'Minecraft';
@@ -31,5 +30,7 @@
         ];
     @endphp
     @include('components.liste_serveur')
+
+<!-- Autres exemples -->
 
 @endsection
