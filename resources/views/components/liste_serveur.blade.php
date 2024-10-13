@@ -59,6 +59,8 @@
     ?>
 
     <div class="overflow-x-auto">
+
+        <!-- Affichage des erreurs -->
         @if (!empty($erreurs))
             <!-- Si des erreurs sont présentes, on les affiche -->
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
@@ -91,6 +93,15 @@
                                         @if (is_array($ligne[$colonne] ?? ''))
                                             {{-- Si c'est un tableau, affiche-le sous forme de JSON ou utilise implode si c'est un tableau simple --}}
                                             {{ json_encode($ligne[$colonne]) }}
+                                        @elseif ($colonne === 'modpack_url' && !empty($ligne[$colonne]))
+                                            {{-- Si c'est la colonne modpack_url, affiche un lien --}}
+                                            <a href="{{ $ligne[$colonne] }}" target="_blank"
+                                                class="text-blue-600 hover:underline">
+                                                {{ $ligne[$colonne] }}
+                                            </a>
+                                        @elseif ($colonne === 'online')
+                                            {{-- Vérifie si la clé 'online' existe et affiche 'Ouvert' ou 'Fermé' --}}
+                                            {{ isset($ligne[$colonne]) && $ligne[$colonne] == 1 ? 'Ouvert' : 'Fermé' }}
                                         @else
                                             {{ $ligne[$colonne] ?? '' }}
                                         @endif
@@ -103,5 +114,4 @@
             </table>
         @endif
     </div>
-
 </div>

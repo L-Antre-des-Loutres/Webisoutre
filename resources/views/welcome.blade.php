@@ -21,11 +21,11 @@
             'nom_monde' => true,
             'version_serv' => true,
             'path_serv' => true,
-            'start_script' => true,
+            'start_script' => false,
             'administrateur' => false,
             'actif' => true,
             'nb_joueurs' => true,
-            'players' => true,
+            'players' => false,
             'online' => true,
         ];
     @endphp
