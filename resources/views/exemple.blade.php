@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 <!-- Gestion du titre de la page -->
-@section('title', 'ADL - Home')
+@section('title', 'Exemple - Antre des loutres')
 
 <!-- Emplacement du contenu de la page -->
 @section('content')
@@ -35,11 +35,10 @@
     <br>
 
     Code d'utilisation
-    <div style="display: flex; align-items: flex-start;">
+    <div>
         <!-- Bloc de code -->
-        <pre id="code-block" style="margin-right: 10px;">
-            <code>
-                @verbatim
+        <code>
+            @verbatim
                 @php
                     $jeu = 'Minecraft';
                     $listeConfig = [
@@ -61,69 +60,68 @@
                     ];
                 @endphp
                 @include('components.liste_serveur')
-                @endverbatim
-            </code>
-        </pre>
-
-        <!-- Bouton Copier -->
-        <button onclick="copyToClipboard()" class="copy-button">Copier</button>
+            @endverbatim
+        </code>
     </div>
 
     <div class="my-4 border-t border-gray-300"></div>
 
+    <!-- Classement des joueurs -->
+    <h1>Tableau classement des joueurs</h1>
+    @php
+        $serveur = 'pixeloween';
 
-    <!-- Fonctionnalité spécifique à la page d'exemple -->
-    <script>
-        function copyToClipboard() {
-            // Sélectionner le contenu du bloc <code>
-            const codeBlock = document.getElementById('code-block').innerText;
+        $listeConfig = [
+            'pseudo' => true,
+            'uuid' => false,
+            'tempsJeux' => true,
+            'nbMorts' => true,
+            'nbSauts' => true,
+            'nbKill' => true,
+            'nbDeathByPlayer' => true,
+            'nbKillMob' => true,
+            'nbBlocMine' => true,
+            'nbKillByMob' => true,
+            'nbUseItem' => true,
+            'nbCraft' => true,
+            'nbItemDrop' => true,
+            'distTotale' => true,
+            'nbItemBreak' => true,
+        ];
+    @endphp
 
-            // Créer un élément temporaire pour sélectionner et copier le texte
-            const tempElement = document.createElement('textarea');
-            tempElement.value = codeBlock;
-            document.body.appendChild(tempElement);
-            tempElement.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempElement);
+    @include('components.classement')
 
-            // Afficher un message ou un feedback visuel
-            alert('Code copié dans le presse-papiers!');
-        }
-    </script>
+    Code d'utilisation
+    <div>
+        <!-- Bloc de code -->
+        <code>
+            @verbatim
+                @php
+                    $serveur = 'pixeloween';
 
-    <style>
-        /* Style du bouton avec un contour */
-        .copy-button {
-            padding: 8px 16px;
-            background-color: transparent;
-            /* Transparent pour mettre en avant le contour */
-            color: #4CAF50;
-            border: 2px solid #4CAF50;
-            /* Contour vert */
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+                    $listeConfig = [
+                        'pseudo' => true,
+                        'uuid' => true,
+                        'tempsJeux' => true,
+                        'nbMorts' => true,
+                        'nbSauts' => true,
+                        'nbKill' => true,
+                        'nbDeathByPlayer' => true,
+                        'nbKillMob' => true,
+                        'nbBlocMine' => true,
+                        'nbKillByMob' => true,
+                        'nbUseItem' => true,
+                        'nbCraft' => true,
+                        'nbItemDrop' => true,
+                        'distTotale' => true,
+                        'nbItemBreak' => true,
+                    ];
+                @endphp
+                @include('components.classement')
+            @endverbatim
+        </code>
+    </div>
 
-        /* Effet au survol */
-        .copy-button:hover {
-            background-color: #4CAF50;
-            color: white;
-            /* Inverser les couleurs lors du survol */
-        }
-
-        /* Style du bloc de code */
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            overflow-x: auto;
-            /* Pour faire défiler horizontalement si le code est long */
-        }
-    </style>
-
-
-    <!-- Autres exemples -->
 
 @endsection

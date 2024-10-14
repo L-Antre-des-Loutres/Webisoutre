@@ -1,4 +1,4 @@
-<footer class="bg-gray-800 w-full min-h-[32vh]">
+<footer class="bg-gray-800 w-full w-full-screen min-h-[32vh]">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-white justify-items-center">
             <div>

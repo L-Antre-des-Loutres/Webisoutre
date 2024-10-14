@@ -1,4 +1,4 @@
-<div id="liste_serveur">
+<div id="composant:liste_serveur">
 
     <?php
 
