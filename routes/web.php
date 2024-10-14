@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\IndexController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/navbar', [NavbarController::class, 'index']);
+Route::get('/exemple', [IndexController::class, 'exempleView']);
 
