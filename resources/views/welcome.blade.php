@@ -30,6 +30,31 @@
             'online' => true,
         ];
     @endphp
+    <br>
     @include('components.liste_serveur')
+
+                    @php
+                    $serveur = 'pixeloween';
+
+                    $listeConfig = [
+                        'pseudo' => true,
+                        'uuid' => true,
+                        'tempsJeux' => true,
+                        'nbMorts' => true,
+                        'nbSauts' => true,
+                        'nbKill' => true,
+                        'nbDeathByPlayer' => true,
+                        'nbKillMob' => true,
+                        'nbBlocMine' => true,
+                        'nbKillByMob' => true,
+                        'nbUseItem' => true,
+                        'nbCraft' => true,
+                        'nbItemDrop' => true,
+                        'distTotale' => true,
+                        'nbItemBreak' => true,
+                    ];
+                @endphp
+
+            @include('components.classement')
 
 @endsection
