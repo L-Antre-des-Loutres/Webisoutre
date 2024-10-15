@@ -52,7 +52,7 @@ class Serveur extends Model
     public static function getServeurs()
     {
         // Utilisation de la classe Http de Laravel pour récupérer les données de l'API
-        $response = Http::get('https://api.antredesloutres.fr/serveurs/');
+        $response = Http::get('https://api.antredesloutres.fr/serveurs/actifs');
 
         // Vérification si la requête a réussi et récupération des données
         if ($response->successful()) {
@@ -65,7 +65,7 @@ class Serveur extends Model
     public static function getJeux()
     {
         // Utilisation de la classe Http de Laravel pour récupérer les données de l'API
-        $response = Http::get('https://api.antredesloutres.fr/serveurs/');
+        $response = Http::get('https://api.antredesloutres.fr/serveurs/actifs');
 
         if (!$response->successful()) {
             return []; // Retourne un tableau vide en cas d'échec
