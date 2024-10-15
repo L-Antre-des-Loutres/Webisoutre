@@ -69,7 +69,7 @@
     <!-- Classement des joueurs -->
     <h1>Tableau classement des joueurs</h1>
     @php
-        $serveur = 'pixeloween';
+        $serveur = 'global';
 
         $listeConfig = [
             'pseudo' => true,
@@ -98,7 +98,7 @@
         <code>
             @verbatim
                 @php
-                    $serveur = 'pixeloween';
+                    $serveur = 'global';
 
                     $listeConfig = [
                         'pseudo' => true,

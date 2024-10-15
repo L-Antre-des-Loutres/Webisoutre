@@ -7,86 +7,25 @@
     // Initialise un tableau pour les erreurs
     $erreurs = [];
 
-    // Vérification de l'existence de la variable $jeu
+    // Vérification de l'existence de la variable $serveur
     if (!isset($serveur)) {
         // Si $serveur n'est pas défini, on essaye de le récupérer à partir de la requête
         if (function_exists('request')) {
             // Si la fonction request() est disponible, on l'utilise
-            $jeu = request()->query('serveur');
+            $serveur = request()->query('serveur');
         } else {
             // Sinon, on le définit manuellement à null ou une autre valeur par défaut
-            $jeu = null;
+            $serveur = null;
         }
     }
 
     // Si le paramètre "serveur" est vide après récupération
-    if ($serveur) {
+    if ($serveur && $serveur != 'global') {
         // Récupérer les serveurs en fonction du jeu spécifié
         $data = Stats::getStatsByServeur($serveur);
     }
-    if ($serveur = 'global') {
-        // Initialiser un tableau pour stocker les totaux par joueur
-        $totalsByPlayer = [];
-
-        // Additionner les données pour chaque joueur
-        foreach ($data as $stat) {
-            $pseudo = $stat['pseudo']; // On utilise le pseudo du joueur comme clé
-
-            // Si le joueur n'existe pas encore dans le tableau, l'initialiser
-            if (!isset($totalsByPlayer[$pseudo])) {
-                $totalsByPlayer[$pseudo] = [
-                    'tempsJeux' => 0,
-                    'nbMorts' => 0,
-                    'nbSauts' => 0,
-                    'nbKill' => 0,
-                    'nbDeathByPlayer' => 0,
-                    'nbKillMob' => 0,
-                    'nbBlocMine' => 0,
-                    'nbKillByMob' => 0,
-                    'nbUseItem' => 0,
-                    'nbCraft' => 0,
-                    'nbItemDrop' => 0,
-                    'distTotale' => 0,
-                    'nbItemBreak' => 0,
-                ];
-            }
-
-            // Additionner les statistiques pour le joueur
-            $totalsByPlayer[$pseudo]['tempsJeux'] += $stat['tempsJeux'];
-            $totalsByPlayer[$pseudo]['nbMorts'] += $stat['nbMorts'];
-            $totalsByPlayer[$pseudo]['nbSauts'] += $stat['nbSauts'];
-            $totalsByPlayer[$pseudo]['nbKill'] += $stat['nbKill'];
-            $totalsByPlayer[$pseudo]['nbDeathByPlayer'] += $stat['nbDeathByPlayer'];
-            $totalsByPlayer[$pseudo]['nbKillMob'] += $stat['nbKillMob'];
-            $totalsByPlayer[$pseudo]['nbBlocMine'] += $stat['nbBlocMine'];
-            $totalsByPlayer[$pseudo]['nbKillByMob'] += $stat['nbKillByMob'];
-            $totalsByPlayer[$pseudo]['nbUseItem'] += $stat['nbUseItem'];
-            $totalsByPlayer[$pseudo]['nbCraft'] += $stat['nbCraft'];
-            $totalsByPlayer[$pseudo]['nbItemDrop'] += $stat['nbItemDrop'];
-            $totalsByPlayer[$pseudo]['distTotale'] += $stat['distTotale'];
-            $totalsByPlayer[$pseudo]['nbItemBreak'] += $stat['nbItemBreak'];
-        }
-
-        // Placer les totaux par joueur dans la variable $data
-        $data = [];
-        foreach ($totalsByPlayer as $pseudo => $totals) {
-            $data[] = [
-                'pseudo' => $pseudo,
-                'tempsJeux' => $totals['tempsJeux'],
-                'nbMorts' => $totals['nbMorts'],
-                'nbSauts' => $totals['nbSauts'],
-                'nbKill' => $totals['nbKill'],
-                'nbDeathByPlayer' => $totals['nbDeathByPlayer'],
-                'nbKillMob' => $totals['nbKillMob'],
-                'nbBlocMine' => $totals['nbBlocMine'],
-                'nbKillByMob' => $totals['nbKillByMob'],
-                'nbUseItem' => $totals['nbUseItem'],
-                'nbCraft' => $totals['nbCraft'],
-                'nbItemDrop' => $totals['nbItemDrop'],
-                'distTotale' => $totals['distTotale'],
-                'nbItemBreak' => $totals['nbItemBreak'],
-            ];
-        }
+    else if ($serveur == 'global') {
+        $data = Stats::getAllStatsOfPlayers();
     } else {
         // Récupérer les stats de l'ensemble des serveurs
         $data = Stats::getAllStats();
@@ -178,8 +117,8 @@
                     <tr class="bg-gray-200 text-gray-600 text-center uppercase text-sm leading-normal">
                         @foreach ($listeConfig as $colonne => $afficher)
                             @if ($afficher)
-                                <th class="py-3 px-6 text-center min-w-[15rem] cursor-pointer" data-key="{{ $colonne }}"
-                                    onclick="sortTable(this)">
+                                <th class="py-3 px-6 text-center min-w-[15rem] cursor-pointer"
+                                    data-key="{{ $colonne }}" onclick="sortTable(this)">
                                     {{ $labels[$colonne] ?? ucfirst(str_replace('_', ' ', $colonne)) }}
                                     <span class="ml-1 text-xs text-gray-500">⇅</span> <!-- Icône de tri -->
                                 </th>
