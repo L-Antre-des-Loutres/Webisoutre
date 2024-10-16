@@ -23,8 +23,7 @@
     if ($serveur && $serveur != 'global') {
         // Récupérer les serveurs en fonction du jeu spécifié
         $data = Stats::getStatsByServeur($serveur);
-    }
-    else if ($serveur == 'global') {
+    } elseif ($serveur == 'global') {
         $data = Stats::getAllStatsOfPlayers();
     } else {
         // Récupérer les stats de l'ensemble des serveurs
@@ -112,7 +111,7 @@
             </div>
         @else
             <!-- Sinon, on affiche le tableau -->
-            <table class="min-w-full bg-white border border-gray-300" id="statsTable">
+            <table class="min-w-full bg-white border border-gray-300 " id="statsTable">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 text-center uppercase text-sm leading-normal">
                         @foreach ($listeConfig as $colonne => $afficher)
@@ -131,17 +130,16 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             @foreach ($listeConfig as $colonne => $afficher)
                                 @if ($afficher)
-                                    <td class="py-3 px-6 min-w-[15rem] text-center">
+                                    <td class="py-3 px-6 min-w-[15rem] text-center align-middle">
                                         {{-- Vérifie si la valeur est un tableau, sinon affiche-la directement --}}
                                         @if (is_array($ligne[$colonne] ?? ''))
                                             {{-- Si c'est un tableau, affiche-le sous forme de JSON ou utilise implode si c'est un tableau simple --}}
                                             {{ json_encode($ligne[$colonne]) }}
+                                        @elseif ($colonne === 'pseudo')
+                                            {{ $ligne[$colonne] ?? '' }}  <img src="https://mc-heads.net/avatar/{{ $ligne[$colonne] ?? '' }}/30" alt="Tête de joueur" style="float: left; margin-left: 10px;">
                                         @elseif ($colonne === 'tempsJeux' && !empty($ligne[$colonne]))
-                                            {{-- Si c'est la colonne modpack_url, affiche un lien --}}
+                                            {{-- Si c'est la colonne tempsJeux, ajoute un H --}}
                                             {{ $ligne[$colonne] }} h
-                                        @elseif ($colonne === 'online')
-                                            {{-- Vérifie si la clé 'online' existe et affiche 'Ouvert' ou 'Fermé' --}}
-                                            {{ isset($ligne[$colonne]) && $ligne[$colonne] == 1 ? 'Ouvert' : 'Fermé' }}
                                         @else
                                             {{ $ligne[$colonne] ?? '' }}
                                         @endif
