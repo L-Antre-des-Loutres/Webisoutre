@@ -82,7 +82,7 @@ class Serveur extends Model
     public static function getServeurByJeu($jeu)
     {
         // Utilisation de la classe Http de Laravel pour récupérer les données de l'API
-        $response = Http::get('https://api.antredesloutres.fr/serveurs/jeu/' . $jeu);
+        $response = Http::get('https://api.antredesloutres.fr/serveurs/actifs/jeu/' . $jeu);
 
         // Vérification si la requête a réussi et récupération des données
         if ($response->successful()) {
