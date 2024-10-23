@@ -123,5 +123,23 @@
         </code>
     </div>
 
+    @php
+        $image = 'La Vanilla';
+    @endphp
+    @include('components.banniere')
+
+    Code d'utilisation
+    <div>
+        <!-- Bloc de code -->
+        <code>
+            @verbatim
+                @php
+                    $image = 'La Vanilla';
+                @endphp
+                @include('components.banniere')
+            @endverbatim
+        </code>
+    </div>
+
 
 @endsection

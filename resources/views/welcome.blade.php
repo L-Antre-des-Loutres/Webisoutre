@@ -4,6 +4,7 @@
 @section('title', 'ADL - Home')
 
 @section('content')
+    @include('components.banniere')
     <h1>Bienvenue sur la page d'accueil</h1>
     <p>Ceci est le contenu de la page d'accueil.</p>
 
@@ -33,28 +34,28 @@
     <br>
     @include('components.liste_serveur')
 
-                    @php
-                    $serveur = 'pixeloween';
+    @php
+        $serveur = 'pixeloween';
 
-                    $listeConfig = [
-                        'pseudo' => true,
-                        'uuid' => true,
-                        'tempsJeux' => true,
-                        'nbMorts' => true,
-                        'nbSauts' => true,
-                        'nbKill' => true,
-                        'nbDeathByPlayer' => true,
-                        'nbKillMob' => true,
-                        'nbBlocMine' => true,
-                        'nbKillByMob' => true,
-                        'nbUseItem' => true,
-                        'nbCraft' => true,
-                        'nbItemDrop' => true,
-                        'distTotale' => true,
-                        'nbItemBreak' => true,
-                    ];
-                @endphp
+        $listeConfig = [
+            'pseudo' => true,
+            'uuid' => true,
+            'tempsJeux' => true,
+            'nbMorts' => true,
+            'nbSauts' => true,
+            'nbKill' => true,
+            'nbDeathByPlayer' => true,
+            'nbKillMob' => true,
+            'nbBlocMine' => true,
+            'nbKillByMob' => true,
+            'nbUseItem' => true,
+            'nbCraft' => true,
+            'nbItemDrop' => true,
+            'distTotale' => true,
+            'nbItemBreak' => true,
+        ];
+    @endphp
 
-            @include('components.classement')
+    @include('components.classement')
 
 @endsection
