@@ -1,7 +1,7 @@
 <!-- resources/views/home.blade.php -->
 @extends('layouts.app')
 
-@section('title', 'ADL - Home')
+@section('title', 'Home - Antre des loutres')
 
 @section('content')
     @include('components.banniere')
