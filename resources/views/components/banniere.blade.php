@@ -1,23 +1,38 @@
 @php
-// Vérification de l'existence de la variable $image
+    // Vérification de l'existence de la variable $image
 if (!isset($image) || empty($image)) {
     // Si $image n'est pas défini ou est vide, on essaie de le récupérer à partir de la requête
-    if (function_exists('request') && request()->has('serveur')) {
-        // Vérifier si la clé 'serveur' existe dans la requête
-        $image = request()->query('serveur');
-    } else {
-        $image = 'La Vanilla'; // Valeur par défaut
+        if (function_exists('request') && request()->has('serveur')) {
+            // Vérifier si la clé 'serveur' existe dans la requête
+            $image = request()->query('serveur');
+        } else {
+            $image = 'La Vanilla'; // Valeur par défaut
+        }
     }
+
+    // Vérification de l'existence de la variable $titre
+if (!isset($titre) || empty($titre)) {
+    $titre = null; // Valeur par défaut
 }
-$imageUrl = 'img/banners/' . $image . '.png';
+
+// Vérification de l'existence de la variable $description
+    if (!isset($description) || empty($description)) {
+        $description = null; // Valeur par défaut
+    }
+
+    $imageUrl = 'img/banners/' . $image . '.png';
 @endphp
 
 <!-- Bannière Parallax -->
 <section class="relative  h-[40vh] md:h-[60vh] sm:h-[40vh] bg-cover bg-center bg-fixed z-1"
     style="background-image: url('{{ asset($imageUrl) }}');">
     <div class="h-full w-full flex flex-col items-center justify-center banner-content">
-        <h1 class="text-4xl font-bold">La Vanilla</h1>
-        <p class="mt-4">Antre des loutres</p>
+        @if ($titre != null)
+            <h1 class="text-4xl font-bold">{{ $titre }}</h1>
+        @endif
+        @if ($titre != null)
+            <p class="mt-4">{{ $description }}</p>
+        @endif
     </div>
 </section>
 
