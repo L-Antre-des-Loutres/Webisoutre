@@ -19,12 +19,18 @@
         }
     }
 
+    if (!isset($jeu)) {
+        $jeu = null;
+    }
+
     // Si le paramètre "serveur" est vide après récupération
-    if ($serveur && $serveur != 'global') {
+    if ($serveur && $serveur != 'global' && $serveur != 'jeu') {
         // Récupérer les serveurs en fonction du jeu spécifié
         $data = Stats::getStatsByServeur($serveur);
     } elseif ($serveur == 'global') {
         $data = Stats::getAllStatsOfPlayers();
+    } elseif ($serveur == 'jeu') {
+        $data = Stats::getAllStatsOfPlayersByGame($jeu);
     } else {
         // Récupérer les stats de l'ensemble des serveurs
         $data = Stats::getAllStats();

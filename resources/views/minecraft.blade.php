@@ -8,24 +8,27 @@
 @section('content')
 
 @php
+$titre = 'Minecraft';
+$description = 'Antre des loutres';
 $image = 'La Vanilla';
 @endphp
+
 @include('components.banniere')
 
 @php
 $listeConfig = [
     'id_serv' => false,
-    'jeu' => true,
+    'jeu' => false,
     'nom_serv' => true,
     'modpack' => true,
     'modpack_url' => true,
     'embedColor' => false,
-    'nom_monde' => true,
+    'nom_monde' => false,
     'version_serv' => true,
-    'path_serv' => true,
+    'path_serv' => false,
     'start_script' => false,
     'administrateur' => false,
-    'actif' => true,
+    'actif' => false,
     'nb_joueurs' => true,
     'players' => false,
     'online' => true,
@@ -33,5 +36,30 @@ $listeConfig = [
 @endphp
 @include('components.liste_serveur')
 
+<h1>Statistique des joueurs Minecraft</h1>
+
+@php
+$serveur = 'jeu';
+
+$listeConfig = [
+    'pseudo' => true,
+    'uuid' => false,
+    'tempsJeux' => true,
+    'nbMorts' => true,
+    'nbSauts' => true,
+    'nbKill' => true,
+    'nbDeathByPlayer' => true,
+    'nbKillMob' => true,
+    'nbBlocMine' => true,
+    'nbKillByMob' => true,
+    'nbUseItem' => true,
+    'nbCraft' => true,
+    'nbItemDrop' => true,
+    'distTotale' => true,
+    'nbItemBreak' => true,
+];
+@endphp
+
+@include('components.classement')
 
 @endsection
