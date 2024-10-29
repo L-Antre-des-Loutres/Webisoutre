@@ -16,7 +16,7 @@ Bientot™
 
 # Technologies Utilisées
 
-Bientot™
+Laravel Tailwind
 
 # Captures d'écran
 
