@@ -1,7 +1,6 @@
-# Webisoutre
+![adl-webi-logo](https://raw.githubusercontent.com/L-Antre-des-Loutres/Webisoutre/refs/heads/main/public/img/logo/adl-webi-logo.png)
 
 *Webisoutre : Combinaison de Web + Loutre*
-<br><br>
 
 # Table des Matières
 
@@ -12,15 +11,18 @@
 
 # Introduction
 
-Bientot™
+> [!NOTE]
+> Bientot™
 
 # Technologies Utilisées
 
-Laravel Tailwind
+> [!NOTE]
+> Bientot™
 
 # Captures d'écran
 
-Bientot™
+> [!NOTE]
+> Bientot™
 
 # Auteurs
 
